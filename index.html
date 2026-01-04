@@ -10,11 +10,12 @@
 
   <style>
     :root{
-      --bg:#f6f8fb;
+      /* Portrait-Balanced Executive Light (tuned for the photo) */
+      --bg:#f5f7fa;
       --card:#ffffff;
-      --line:#e4e8ef;
-      --text:#1f2937;
-      --muted:#4b5563;
+      --line:#dfe4ec;
+      --text:#1e293b;
+      --muted:#5f6b7a;
     }
 
     *{box-sizing:border-box}
@@ -24,19 +25,39 @@
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
       color:var(--text);
-      background:linear-gradient(180deg,#f9fbff 0%, var(--bg) 100%);
+      background:linear-gradient(180deg,#fbfcfe 0%, var(--bg) 100%);
     }
 
     a{color:inherit}
 
-    .wrap{max-width:1040px;margin:0 auto;padding:28px 18px 64px}
+    .wrap{max-width:1040px;margin:0 auto;padding:22px 14px 56px}
+
+    /* Sticky header container */
+    .header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(251, 252, 254, .85);
+      backdrop-filter:saturate(180%) blur(10px);
+      -webkit-backdrop-filter:saturate(180%) blur(10px);
+      border-bottom:1px solid rgba(223, 228, 236, .9);
+    }
+    .header-inner{
+      max-width:1040px;
+      margin:0 auto;
+      padding:12px 14px;
+    }
+    @media (min-width:900px){
+      .wrap{padding:28px 18px 64px}
+      .header-inner{padding:14px 18px}
+    }
 
     /* Top row + nav */
     .top{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      gap:12px;
+      gap:10px;
       flex-wrap:wrap;
     }
     .pill{
@@ -45,11 +66,13 @@
       padding:8px 12px;
       border-radius:999px;
       color:var(--muted);
-      font-size:13.5px;
+      font-size:13px;
+      line-height:1.2;
+      white-space:nowrap;
     }
     .nav{
       display:flex;
-      gap:10px;
+      gap:6px;
       flex-wrap:wrap;
       align-items:center;
     }
@@ -58,73 +81,97 @@
       color:var(--muted);
       padding:8px 10px;
       border-radius:10px;
-      font-size:13.5px;
+      font-size:13px;
+      border:1px solid transparent;
     }
     .nav a:hover{
       background:#f2f5ff;
+      border-color:#d6dcff;
       color:var(--text);
+    }
+
+    /* Anchor offset so sticky header doesn't cover section titles */
+    section[id]{scroll-margin-top:90px;}
+    @media (min-width:900px){
+      section[id]{scroll-margin-top:100px;}
+      .pill{font-size:13.5px}
+      .nav a{font-size:13.5px}
     }
 
     /* Hero */
     .hero{
-      margin-top:18px;
+      margin-top:14px;
       border:1px solid var(--line);
-      background:var(--card);
+      background:linear-gradient(180deg,#ffffff 0%, #fbfcfe 100%);
       border-radius:18px;
-      padding:22px;
+      padding:18px;
       box-shadow:0 8px 24px rgba(0,0,0,.04);
     }
     .hero-inner{
       display:grid;
       grid-template-columns:1fr;
-      gap:18px;
+      gap:14px;
       align-items:center;
     }
     @media (min-width:900px){
+      .hero{padding:22px;margin-top:18px}
       .hero-inner{grid-template-columns:180px 1fr;gap:22px;}
     }
 
     .profile{
-      width:140px;
-      height:140px;
+      width:120px;
+      height:120px;
       border-radius:999px;
       object-fit:cover;
       border:1px solid var(--line);
       background:#fff;
+      box-shadow:0 4px 14px rgba(0,0,0,.06);
+      justify-self:start;
     }
     @media (min-width:900px){
       .profile{width:170px;height:170px;}
     }
 
     h1{
-      margin:0 0 10px;
-      font-size:34px;
+      margin:0 0 8px;
+      font-size:26px;
       letter-spacing:.2px;
+      line-height:1.15;
+    }
+    @media (min-width:900px){
+      h1{font-size:34px;margin:0 0 10px;}
     }
 
     .hero-meta{
       margin:0 0 10px;
       color:var(--muted);
-      font-size:14.5px;
+      font-size:13.5px;
       line-height:1.5;
     }
     .hero-meta b{color:var(--text)}
+    @media (min-width:900px){
+      .hero-meta{font-size:14.5px}
+    }
 
     .sub{
       color:var(--muted);
-      line-height:1.6;
-      font-size:15.5px;
+      line-height:1.65;
+      font-size:14.5px;
       max-width:78ch;
       margin:0;
+    }
+    @media (min-width:900px){
+      .sub{font-size:15.5px;line-height:1.6}
     }
 
     .actions{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin-top:14px;
+      margin-top:12px;
     }
 
+    /* Icon buttons */
     .btn{
       display:inline-flex;
       align-items:center;
@@ -135,27 +182,45 @@
       background:#fff;
       border-radius:12px;
       text-decoration:none;
+      -webkit-tap-highlight-color:transparent;
     }
     .btn:hover{background:#f2f5ff}
-
+    .btn:focus-visible{
+      outline:3px solid rgba(37, 99, 235, .25);
+      outline-offset:2px;
+    }
     .btn svg{display:block}
 
-    .btn[aria-label="Email"] svg{color:#4b5563}
+    .btn[aria-label="Email"] svg{color:var(--muted)}
     .btn[aria-label="WhatsApp"] svg{color:#25D366}
 
     /* Grid + cards */
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:20px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;
+      margin-top:16px;
+    }
+    @media (min-width:900px){
+      .grid{gap:16px;margin-top:20px}
+    }
 
     .card{
       grid-column:span 12;
       border:1px solid var(--line);
       background:var(--card);
       border-radius:16px;
-      padding:20px;
+      padding:16px;
       box-shadow:0 4px 16px rgba(0,0,0,.03);
     }
+    @media (min-width:900px){
+      .card{padding:20px}
+    }
 
-    h2{margin:0 0 10px;font-size:18px}
+    h2{margin:0 0 10px;font-size:17px}
+    @media (min-width:900px){
+      h2{font-size:18px}
+    }
 
     /* Professional Profile cards */
     .deflist{
@@ -166,59 +231,96 @@
     }
     .defitem{
       border:1px solid var(--line);
-      background:#fafbff;
+      background:#f9fafc;
       border-radius:12px;
       padding:12px 14px;
     }
     .defitem .k{
       font-weight:700;
       margin:0 0 6px;
+      color:var(--text);
+      font-size:14px;
     }
     .defitem .v{
       margin:0;
       color:var(--muted);
       line-height:1.6;
+      font-size:14px;
     }
     @media (min-width:900px){
       .deflist{grid-template-columns:1fr 1fr}
+      .defitem .k,.defitem .v{font-size:15px}
     }
 
-    ul{margin:10px 0 0 18px;color:var(--muted);line-height:1.6}
+    /* Services cards (match Professional Profile) */
+    .services-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+      margin-top:10px;
+    }
+    @media (min-width:900px){
+      .services-grid{grid-template-columns:1fr 1fr}
+    }
+    .service-item{
+      border:1px solid var(--line);
+      background:#f9fafc;
+      border-radius:12px;
+      padding:12px 14px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+    @media (min-width:900px){
+      .service-item{font-size:15px}
+    }
 
+    /* Contact grid: stack on mobile */
     .kv{
       display:grid;
-      grid-template-columns:160px 1fr;
-      gap:8px 12px;
+      grid-template-columns:1fr;
+      gap:6px 12px;
       color:var(--muted);
-      font-size:14.5px;
+      font-size:14px;
+      line-height:1.5;
     }
     .kv b{color:var(--text)}
+    @media (min-width:700px){
+      .kv{grid-template-columns:160px 1fr;font-size:14.5px}
+    }
 
     footer{
-      margin-top:24px;
+      margin-top:20px;
       color:#6b7280;
       font-size:12.5px;
       line-height:1.7;
       text-align:center;
+      padding:0 6px;
     }
   </style>
 </head>
 
 <body>
-<div class="wrap">
 
-  <div class="top">
-    <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <div class="pill">Chartered Accountant (ICAI)</div>
-      <div class="pill">Kochi (Cochin), Kerala, India</div>
+<!-- Sticky header -->
+<header class="header">
+  <div class="header-inner">
+    <div class="top">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <div class="pill">Chartered Accountant (ICAI)</div>
+        <div class="pill">Kochi (Cochin), Kerala, India</div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#profile">Profile</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
-
-    <nav class="nav" aria-label="Primary">
-      <a href="#profile">Profile</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
-    </nav>
   </div>
+</header>
+
+<div class="wrap">
 
   <section class="hero">
     <div class="hero-inner">
@@ -315,16 +417,17 @@
 
     <section class="card" id="services">
       <h2>Services</h2>
-      <p class="sub" style="font-size:14px;">
+      <p class="sub" style="font-size:13.5px;">
         Services are provided in accordance with applicable professional standards and subject to formal engagement.
       </p>
-      <ul>
-        <li>Accounting and compliance support</li>
-        <li>Tax and GST compliance support</li>
-        <li>Audit and assurance services (as applicable)</li>
-        <li>Business registrations and statutory filings</li>
-        <li>Financial planning, budgeting, and MIS reporting</li>
-      </ul>
+
+      <div class="services-grid">
+        <div class="service-item">Accounting and compliance support</div>
+        <div class="service-item">Tax and GST compliance support</div>
+        <div class="service-item">Audit and assurance services (as applicable)</div>
+        <div class="service-item">Business registrations and statutory filings</div>
+        <div class="service-item">Financial planning, budgeting, and MIS reporting</div>
+      </div>
     </section>
 
     <section class="card" id="contact">
