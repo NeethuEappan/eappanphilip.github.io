@@ -15,7 +15,6 @@
       --line:#e4e8ef;
       --text:#1f2937;
       --muted:#4b5563;
-      --accent:#2563eb;
     }
 
     *{box-sizing:border-box}
@@ -57,18 +56,16 @@
     .nav a{
       text-decoration:none;
       color:var(--muted);
-      border:1px solid transparent;
       padding:8px 10px;
       border-radius:10px;
       font-size:13.5px;
     }
     .nav a:hover{
       background:#f2f5ff;
-      border-color:#d6dcff;
       color:var(--text);
     }
 
-    /* Hero: left photo / right text */
+    /* Hero */
     .hero{
       margin-top:18px;
       border:1px solid var(--line);
@@ -76,17 +73,17 @@
       border-radius:18px;
       padding:22px;
       box-shadow:0 8px 24px rgba(0,0,0,.04);
-      text-align:left;
     }
     .hero-inner{
       display:grid;
-      grid-template-columns: 1fr;
+      grid-template-columns:1fr;
       gap:18px;
       align-items:center;
     }
     @media (min-width:900px){
-      .hero-inner{grid-template-columns: 180px 1fr; gap:22px;}
+      .hero-inner{grid-template-columns:180px 1fr;gap:22px;}
     }
+
     .profile{
       width:140px;
       height:140px;
@@ -94,22 +91,22 @@
       object-fit:cover;
       border:1px solid var(--line);
       background:#fff;
-      display:block;
     }
     @media (min-width:900px){
       .profile{width:170px;height:170px;}
     }
 
-    .hero-text h1{
+    h1{
       margin:0 0 10px;
       font-size:34px;
       letter-spacing:.2px;
     }
+
     .hero-meta{
       margin:0 0 10px;
       color:var(--muted);
-      line-height:1.5;
       font-size:14.5px;
+      line-height:1.5;
     }
     .hero-meta b{color:var(--text)}
 
@@ -125,7 +122,6 @@
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      justify-content:flex-start;
       margin-top:14px;
     }
 
@@ -133,20 +129,21 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
+      width:44px;
+      height:44px;
       border:1px solid var(--line);
       background:#fff;
-      padding:10px 14px;
       border-radius:12px;
-      font-size:14px;
       text-decoration:none;
-      color:var(--text);
     }
-    .btn:hover{background:#f2f5ff;border-color:#d6dcff}
+    .btn:hover{background:#f2f5ff}
 
-    .icon-btn{width:44px;height:44px;padding:0}
-    .icon-btn svg{display:block;color:#25D366}
+    .btn svg{display:block}
 
-    /* Content grid */
+    .btn[aria-label="Email"] svg{color:#4b5563}
+    .btn[aria-label="WhatsApp"] svg{color:#25D366}
+
+    /* Grid + cards */
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:20px}
 
     .card{
@@ -158,24 +155,9 @@
       box-shadow:0 4px 16px rgba(0,0,0,.03);
     }
 
-    @media (min-width:900px){
-      .half{grid-column:span 6}
-    }
-
     h2{margin:0 0 10px;font-size:18px}
 
-    ul{margin:10px 0 0 18px;color:var(--muted);line-height:1.6}
-
-    .kv{
-      display:grid;
-      grid-template-columns:160px 1fr;
-      gap:8px 12px;
-      color:var(--muted);
-      font-size:14.5px;
-    }
-    .kv b{color:var(--text);font-weight:600}
-
-    /* Professional Profile – smart cards */
+    /* Professional Profile cards */
     .deflist{
       display:grid;
       grid-template-columns:1fr;
@@ -190,8 +172,7 @@
     }
     .defitem .k{
       font-weight:700;
-      color:var(--text);
-      margin:0 0 6px 0;
+      margin:0 0 6px;
     }
     .defitem .v{
       margin:0;
@@ -199,8 +180,19 @@
       line-height:1.6;
     }
     @media (min-width:900px){
-      .deflist{grid-template-columns:1fr 1fr;}
+      .deflist{grid-template-columns:1fr 1fr}
     }
+
+    ul{margin:10px 0 0 18px;color:var(--muted);line-height:1.6}
+
+    .kv{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:8px 12px;
+      color:var(--muted);
+      font-size:14.5px;
+    }
+    .kv b{color:var(--text)}
 
     footer{
       margin-top:24px;
@@ -216,7 +208,7 @@
 <div class="wrap">
 
   <div class="top">
-    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
       <div class="pill">Chartered Accountant (ICAI)</div>
       <div class="pill">Kochi (Cochin), Kerala, India</div>
     </div>
@@ -231,11 +223,9 @@
   <section class="hero">
     <div class="hero-inner">
 
-      <div>
-        <img class="profile" src="assets/EP_photo_light_bg.jpg" alt="C.A. Eappen Philip">
-      </div>
+      <img class="profile" src="assets/EP_photo_light_bg.jpg" alt="C.A. Eappen Philip">
 
-      <div class="hero-text">
+      <div>
         <h1>C.A. Eappen Philip</h1>
 
         <p class="hero-meta">
@@ -244,27 +234,34 @@
         </p>
 
         <p class="sub">
-          Fellow Chartered Accountant with over 30 years of experience in finance leadership,
-          budgeting, and working capital management. Professional focus includes project
-          structuring, risk management, and financial planning. Proficient in overseeing
-          procurement, supply chain operations, and ERP/MIS implementation, with a core
-          emphasis on corporate governance and reporting support.
+          Fellow Chartered Accountant with over 30 years of professional experience in
+          finance, budgeting, and working capital management. Areas of work include
+          project structuring, risk management, financial planning, ERP/MIS systems,
+          procurement coordination, and corporate governance support.
         </p>
 
         <div class="actions">
-          <a class="btn" href="mailto:eappanphilipandcompany@gmail.com">Email</a>
+          <!-- Email icon -->
+          <a class="btn"
+             href="mailto:eappanphilipandcompany@gmail.com"
+             aria-label="Email"
+             title="Email">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path fill="currentColor"
+                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </a>
 
-          <a class="btn icon-btn"
+          <!-- WhatsApp icon -->
+          <a class="btn"
              href="https://wa.me/919496740894"
              target="_blank"
              rel="noopener"
              aria-label="WhatsApp"
              title="WhatsApp">
-            <svg viewBox="0 0 32 32" width="18" height="18" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
               <path fill="currentColor"
-                d="M19.11 17.29c-.28-.14-1.64-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.08-.16.18-.32.21-.6.07-.28-.14-1.18-.43-2.24-1.38-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.12-.12.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.61-1.47-.84-2.02-.22-.53-.45-.46-.61-.47l-.52-.01c-.18 0-.46.07-.7.35-.25.28-.92.9-.92 2.2 0 1.29.95 2.54 1.08 2.72.14.18 1.87 2.86 4.53 4.01.63.27 1.12.43 1.51.55.63.2 1.2.17 1.65.1.5-.08 1.64-.67 1.87-1.31.23-.64.23-1.18.16-1.31-.07-.12-.25-.2-.53-.34z"/>
-              <path fill="currentColor"
-                d="M16 3C9.38 3 4 8.38 4 15c0 2.65.87 5.1 2.34 7.08L4 29l7.15-2.26A11.9 11.9 0 0 0 16 27c6.62 0 12-5.38 12-12S22.62 3 16 3z"/>
+                d="M12 2C6.48 2 2 6.14 2 11.24c0 2.06.72 3.96 1.92 5.49L2 22l5.55-1.78c1.43.76 3.06 1.2 4.45 1.2 5.52 0 10-4.14 10-9.24S17.52 2 12 2zm5.27 12.69c-.22.6-1.3 1.13-1.82 1.2-.49.07-1.1.1-1.78-.1-.41-.13-.94-.3-1.62-.63-2.86-1.38-4.71-4.15-4.86-4.35-.15-.2-1.16-1.53-1.16-2.92 0-1.39.74-2.08 1-2.37.26-.29.58-.36.78-.36.2 0 .39 0 .56.01.18.01.42-.07.66.52.24.59.83 2.04.9 2.19.07.15.12.33.02.53-.1.2-.15.33-.29.5-.15.17-.31.37-.44.5-.15.13-.31.27-.13.53.18.26.79 1.29 1.7 2.09 1.17 1.02 2.16 1.34 2.47 1.49.31.15.49.13.67-.08.18-.2.78-.89.99-1.19.2-.3.41-.25.68-.15.27.1 1.71.79 2 1 .29.2.49.3.56.47.07.17.07.96-.15 1.56z"/>
             </svg>
           </a>
         </div>
@@ -274,29 +271,6 @@
   </section>
 
   <div class="grid">
-
-    <section class="card half">
-      <h2>About</h2>
-      <p class="sub">
-        Chartered Accountant with experience in accounting, compliance, financial management,
-        reporting, and internal control support for individuals and businesses.
-      </p>
-    </section>
-
-    <section class="card half" id="contact">
-      <h2>Contact</h2>
-      <div class="kv">
-        <div><b>Location</b></div><div>Kochi (Cochin), Kerala, India</div>
-        <div><b>Email</b></div>
-        <div><a href="mailto:eappanphilipandcompany@gmail.com">eappanphilipandcompany@gmail.com</a></div>
-        <div><b>WhatsApp</b></div>
-        <div>
-          <a href="https://wa.me/919496740894" target="_blank" rel="noopener">
-            +91&nbsp;94967&nbsp;40894
-          </a>
-        </div>
-      </div>
-    </section>
 
     <section class="card" id="profile">
       <h2>Professional Profile</h2>
@@ -344,7 +318,6 @@
       <p class="sub" style="font-size:14px;">
         Services are provided in accordance with applicable professional standards and subject to formal engagement.
       </p>
-
       <ul>
         <li>Accounting and compliance support</li>
         <li>Tax and GST compliance support</li>
@@ -352,6 +325,17 @@
         <li>Business registrations and statutory filings</li>
         <li>Financial planning, budgeting, and MIS reporting</li>
       </ul>
+    </section>
+
+    <section class="card" id="contact">
+      <h2>Contact</h2>
+      <div class="kv">
+        <div><b>Location</b></div><div>Kochi (Cochin), Kerala, India</div>
+        <div><b>Email</b></div>
+        <div><a href="mailto:eappanphilipandcompany@gmail.com">eappanphilipandcompany@gmail.com</a></div>
+        <div><b>WhatsApp</b></div>
+        <div><a href="https://wa.me/919496740894" target="_blank" rel="noopener">+91&nbsp;94967&nbsp;40894</a></div>
+      </div>
     </section>
 
   </div>
